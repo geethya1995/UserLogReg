@@ -48,11 +48,8 @@ else
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
-
-                    *
+                    @Html.ValidationMessage("DuplicateEmail", new { @class = "text-danger" })
                 </div>
-
-
             </div>
 
             <div class="form-group">
@@ -94,7 +91,7 @@ else
     }
 
 }
-
+ 
 <div>
     @Html.ActionLink("Login", "Login")
 </div>

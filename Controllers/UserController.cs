@@ -21,7 +21,36 @@ namespace TestProj.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Registration([Bind(Exclude = "IsEmailVerified , ActivationCode")] User user)
         {
+            // variables to be used in ViewBag
+            bool Status = false;
+            string message = "";
+
             // Submit and save the form data to User table (Logic)
+            // 1. Model Validation
+            if (ModelState.IsValid)
+            {
+
+                #region // 2. Duplicate E-mails (Email already exists?)
+                if (IsEmailExist(user.Email))
+                {
+                    ModelState.AddModelError("DuplicateEmail", "Email already exists");
+                    return View();
+                }
+                #endregion
+
+            }
+
+
+
+
+            // 3. Generate Activation Code
+
+            // 4. Password Hashing
+
+            // 5. Save data to DB
+
+            // 6. Send E-mail to user
+
             return View(User);
         }
 
@@ -34,6 +63,23 @@ namespace TestProj.Controllers
         // Login POST
 
         // Logout
+
+        [NonAction]
+        public bool IsEmailExist(string emailID)
+        {
+            using (MyDatabaseEntities dc = new MyDatabaseEntities())
+            {
+                var duplicateEmail = dc.Users.Where(a => a.Email == emailID).FirstOrDefault();
+                if (duplicateEmail != null)
+                {
+                    return true;
+                } else
+                {
+                    return false;
+                }
+            }
+        }
+
 
     }
 }
