@@ -109,6 +109,11 @@ namespace TestProj.Controllers
         }
 
         // Login
+        [HttpGet]
+        public ActionResult Login()
+        {
+            return View();  
+        }
 
         // Login POST
 
