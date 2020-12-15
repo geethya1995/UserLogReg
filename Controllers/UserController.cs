@@ -83,9 +83,30 @@ namespace TestProj.Controllers
             return View();
         }
 
-        // Verify E-mail (Account validation)
-
-        // Verify E-mail link
+        // Verify Account (By clicking the link in mail)
+        [HttpGet]
+        public ActionResult VerifyAccount(string id)
+        {
+            bool status = false;
+            using (MyDatabaseEntities dc = new MyDatabaseEntities())
+            {
+                dc.Configuration.ValidateOnSaveEnabled = false; // This line is added to avoid 
+                                                                // Confirm password does not match issue on save changes
+                var v = dc.Users.Where(a => a.ActivationCode == new Guid(id)).FirstOrDefault();
+                if (v != null)
+                {
+                    v.IsEmailVerified = true;
+                    dc.SaveChanges();
+                    status = true;
+                }
+                else
+                {
+                    ViewBag.Message = "Invalid Request";
+                }
+            }
+            ViewBag.Status = status;
+            return View();
+        }
 
         // Login
 
