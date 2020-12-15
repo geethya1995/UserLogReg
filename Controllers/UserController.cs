@@ -42,6 +42,10 @@ namespace TestProj.Controllers
                 user.ActivationCode = Guid.NewGuid();
                 #endregion
 
+
+            } else
+            {
+                message = "Invalid Request";
             }
 
             // 4. Password Hashing
