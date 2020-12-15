@@ -17,7 +17,7 @@ namespace TestProj.Controllers
 
         // Registration POST Action
 
-        // Verify E-mail (Verifying the Account/User)
+        // Verify E-mail (Account validation)
 
         // Verify E-mail link
 
