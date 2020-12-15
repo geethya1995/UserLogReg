@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using TestProj.Models;
+using System.Net.Mail;
 
 namespace TestProj.Controllers
 {
@@ -57,6 +58,14 @@ namespace TestProj.Controllers
                 {
                     dc.Users.Add(user);
                     dc.SaveChanges();
+
+                    /* If data write is successful,
+                     * send E-mail to user for E-mail verification
+                     */
+
+                    // 6. Send E-mail to user
+
+
                 }
                 #endregion
 
@@ -66,8 +75,6 @@ namespace TestProj.Controllers
             {
                 message = "Invalid Request";
             }
-
-            // 6. Send E-mail to user
 
             return View(User);
         }
@@ -96,6 +103,23 @@ namespace TestProj.Controllers
                     return false;
                 }
             }
+        }
+
+        [NonAction]
+        public void SendVerificationEmail(string emailID, string activationCode)
+        {
+            var verifyUrl = "/User/VerifyAccount/" + activationCode;
+            var link = Request.Url.AbsoluteUri.Replace(Request.Url.PathAndQuery, verifyUrl);
+
+            var senderMail = new MailAddress("geethya1995@gmail.com", "User Registration");
+            var senderPassword = "GeethyA@1995";
+            var receiverMail = new MailAddress(emailID);
+
+            string subject = "Your account is successfully created!";
+            string body = "<br/><br/> We are excited to tell you that your user account is" +
+                " successfully created. Please click on the below link to verify your account." +
+                " <br/><br/><a href='" + link + "'>" + link + "</a>";
+
         }
 
 
