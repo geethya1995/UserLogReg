@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using TestProj.Models;
 using System.Net.Mail;
+using System.Net;
 
 namespace TestProj.Controllers
 {
@@ -119,6 +120,17 @@ namespace TestProj.Controllers
             string body = "<br/><br/> We are excited to tell you that your user account is" +
                 " successfully created. Please click on the below link to verify your account." +
                 " <br/><br/><a href='" + link + "'>" + link + "</a>";
+
+            // Configure SMTP (Simple Mail Transfer Protocol) client
+            var smtpClient = new SmtpClient
+            {
+                Host = "smtp.gmail.com",
+                Port = 587,
+                EnableSsl = true,
+                DeliveryMethod = SmtpDeliveryMethod.Network,
+                UseDefaultCredentials = false,
+                Credentials = new NetworkCredential(senderMail.Address, senderPassword)
+            };
 
         }
 
