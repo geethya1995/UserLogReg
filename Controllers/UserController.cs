@@ -132,6 +132,14 @@ namespace TestProj.Controllers
                 Credentials = new NetworkCredential(senderMail.Address, senderPassword)
             };
 
+            using (var message = new MailMessage(senderMail, receiverMail)
+            {
+                Subject = subject,
+                Body = body,
+                IsBodyHtml = true
+            })
+                smtpClient.Send(message);
+
         }
 
 
