@@ -52,13 +52,20 @@ namespace TestProj.Controllers
                 // 1st time user
                 user.IsEmailVerified = false;
 
+                #region 5. Save data to DB
+                using(MyDatabaseEntities dc = new MyDatabaseEntities())
+                {
+                    dc.Users.Add(user);
+                    dc.SaveChanges();
+                }
+                #endregion
+
+
             }
             else
             {
                 message = "Invalid Request";
             }
-
-            // 5. Save data to DB
 
             // 6. Send E-mail to user
 
