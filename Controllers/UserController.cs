@@ -72,13 +72,14 @@ namespace TestProj.Controllers
                 }
                 #endregion
 
-
             }
             else
             {
                 message = "Invalid Request";
             }
 
+            ViewBag.Message = message;
+            ViewBag.Status = status;
             return View(User);
         }
 
