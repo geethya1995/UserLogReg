@@ -33,8 +33,7 @@ namespace TestProj.Models
         public String Email { get; set; }
 
         [Display(Name = "Date of Birth")]
-        [Required(AllowEmptyStrings = true)]
-        [DataType(DataType.DateTime)]
+        [DataType(DataType.Date)]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{dd/mm/yyyy}")]
         public DateTime DOB { get; set; }
 

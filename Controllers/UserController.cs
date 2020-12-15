@@ -80,7 +80,7 @@ namespace TestProj.Controllers
 
             ViewBag.Message = message;
             ViewBag.Status = status;
-            return View(User);
+            return View();
         }
 
         // Verify E-mail (Account validation)
@@ -116,7 +116,7 @@ namespace TestProj.Controllers
             var link = Request.Url.AbsoluteUri.Replace(Request.Url.PathAndQuery, verifyUrl);
 
             var senderMail = new MailAddress("geethya1995@gmail.com", "User Registration");
-            var senderPassword = "GeethyA@1995";
+            var senderPassword = "fifthharmony";
             var receiverMail = new MailAddress(emailID);
 
             string subject = "Your account is successfully created!";
@@ -129,10 +129,10 @@ namespace TestProj.Controllers
             {
                 Host = "smtp.gmail.com",
                 Port = 587,
-                EnableSsl = true,
                 DeliveryMethod = SmtpDeliveryMethod.Network,
                 UseDefaultCredentials = false,
-                Credentials = new NetworkCredential(senderMail.Address, senderPassword)
+                Credentials = new NetworkCredential(senderMail.Address, senderPassword),
+                EnableSsl = true,
             };
 
             using (var message = new MailMessage(senderMail, receiverMail)
