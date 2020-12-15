@@ -24,7 +24,7 @@ namespace TestProj.Controllers
         public ActionResult Registration([Bind(Exclude = "IsEmailVerified , ActivationCode")] User user)
         {
             // variables to be used in ViewBag
-            bool Status = false;
+            bool status = false;
             string message = "";
 
             // Submit and save the form data to User table (Logic)
@@ -65,8 +65,10 @@ namespace TestProj.Controllers
                      */
 
                     // 6. Send E-mail to user
-
-
+                    SendVerificationEmail(user.Email, user.ActivationCode.ToString());
+                    message = "Registration successfully done. Account activation link " +
+                        " has been sent to your email id: " + user.Email;
+                    status = true;
                 }
                 #endregion
 
@@ -141,7 +143,6 @@ namespace TestProj.Controllers
                 smtpClient.Send(message);
 
         }
-
 
     }
 }
