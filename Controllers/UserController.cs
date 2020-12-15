@@ -30,7 +30,7 @@ namespace TestProj.Controllers
             if (ModelState.IsValid)
             {
 
-                #region // 2. Duplicate E-mails (Email already exists?)
+                #region 2. Duplicate E-mails (Email already exists?)
                 if (IsEmailExist(user.Email))
                 {
                     ModelState.AddModelError("DuplicateEmail", "Email already exists");
@@ -38,12 +38,11 @@ namespace TestProj.Controllers
                 }
                 #endregion
 
+                #region 3. Generate Activation Code
+                user.ActivationCode = Guid.NewGuid();
+                #endregion
+
             }
-
-
-
-
-            // 3. Generate Activation Code
 
             // 4. Password Hashing
 
