@@ -40,7 +40,7 @@ namespace TestProj.Models
 
         [Display(Name = "Password")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "Password is mandatory")]
-        [MinLength(8, ErrorMessage = "At least 8 characters should be in your password"]
+        [MinLength(8, ErrorMessage = "At least 8 characters should be in your password")]
         [DataType(DataType.Password)]
         public String Password { get; set; }
 
