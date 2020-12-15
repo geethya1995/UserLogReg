@@ -42,13 +42,21 @@ namespace TestProj.Controllers
                 user.ActivationCode = Guid.NewGuid();
                 #endregion
 
+                #region 4. Password Hashing
+                user.Password = Encryptor.Hash(user.Password);
 
-            } else
+                // To avoid confirm password does not match issue (DB context validate again on set changes)
+                user.ConfirmPassword = Encryptor.Hash(user.ConfirmPassword);
+                #endregion
+
+                // 1st time user
+                user.IsEmailVerified = false;
+
+            }
+            else
             {
                 message = "Invalid Request";
             }
-
-            // 4. Password Hashing
 
             // 5. Save data to DB
 
